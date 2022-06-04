@@ -1,0 +1,9 @@
+.agregar {
+    margin-top: 10px;
+}
+
+.counters {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}

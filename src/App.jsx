@@ -1,17 +1,21 @@
-import './App.css'
-import ItemListContainer from './components/Cuerpo/ItemListContainer'
-import NavBar from './components/NavBar/NavBar'
-
+import "./App.css";
+import ItemListContainer from "./components/Cuerpo/ItemListContainer";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
-  
-  let saludos = 'Bienvenidos'
+  let saludos = "Bienvenidos";
+
   return (
-    <div className='App'>
-      <NavBar></NavBar>
-      <ItemListContainer greeting={saludos}></ItemListContainer>
+    <div className="App">
+      <nav>
+        <NavBar></NavBar>
+      </nav>
+
+      <main>
+        <ItemListContainer greeting={saludos}></ItemListContainer>
+      </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
