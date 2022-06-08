@@ -1,12 +1,15 @@
 import React from "react";
+import ItemCount from "./ItemCount";
+import "../Cuerpo/Item.css";
 
-const Item = (item) => {
+const Item = ({ producto }) => {
+  const { nombre, pictureUrl, precio, stock } = producto;
   return (
-    <div className="card w-180">
-      <img src={item.img} height={200} alt="" className="card-img-top" />
+    <div className="card">
+      <img className="card-img-top" src={pictureUrl} alt="" />
       <div className="card-body">
-        <h5 className="card-title">{item.title}</h5>
-        <p className="card-text">{item.price}</p>
+        <h5 className="card-title">{nombre}</h5>
+        <p className="card-text">${precio}</p>
         <a href="#" class="btn btn-primary">
           Ver Detalles
         </a>
