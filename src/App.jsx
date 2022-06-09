@@ -1,10 +1,10 @@
+import { useEffect, useState } from "react";
 import "./App.css";
-import ItemListContainer from "./components/Cuerpo/ItemListContainer";
+import ItemListContainer from "../src/components/ItemList/ItemListContainer";
 import NavBar from "./components/NavBar/NavBar";
+import ItemDetailContainer from "./components/ItemDetail/ItemDetailContainer";
 
 function App() {
-  let saludos = "Bienvenidos";
-
   return (
     <div className="App">
       <nav>
@@ -12,7 +12,8 @@ function App() {
       </nav>
 
       <main>
-        <ItemListContainer greeting={saludos}></ItemListContainer>
+        <ItemListContainer></ItemListContainer>
+        <ItemDetailContainer></ItemDetailContainer>
       </main>
     </div>
   );

@@ -1,4 +1,4 @@
-import "../Cuerpo/ItemCount.css";
+import "../ItemCount/ItemCount.css";
 import { useState } from "react";
 
 function ItemCount({ stock, initial, onAdd }) {

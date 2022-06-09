@@ -1,6 +1,6 @@
 import React from "react";
-import ItemCount from "./ItemCount";
-import "../Cuerpo/Item.css";
+import ItemCount from "../ItemCount/ItemCount";
+import "../ItemList/Item.css";
 
 const Item = ({ producto }) => {
   const { nombre, pictureUrl, precio, stock } = producto;

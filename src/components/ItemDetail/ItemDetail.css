@@ -1,0 +1,13 @@
+.item-detail-box {
+    width: 60rem;
+    margin-bottom: 8rem;
+}
+
+.img-detail {
+    max-width: 90%;
+    width: 25rem;
+    height: 20rem;
+    margin: auto;
+    display: block;
+}
+
