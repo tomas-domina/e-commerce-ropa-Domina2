@@ -3,3 +3,9 @@
     height: 220px;
     width: auto;
 }
+
+.ver-detalles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -17,7 +17,7 @@ function ItemCount({ stock, initial, onAdd }) {
   }
 
   return (
-    <div>
+    <div className="item-count">
       <div class="btn-group" role="group" aria-label="Basic example">
         <button onClick={quitar} type="button" className="btn btn-dark">
           -

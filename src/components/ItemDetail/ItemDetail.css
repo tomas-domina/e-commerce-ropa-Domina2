@@ -11,3 +11,8 @@
     display: block;
 }
 
+.card-title,
+.card-text {
+    text-align: center;
+}
+
