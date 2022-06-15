@@ -4,6 +4,10 @@ import ItemCount from "../ItemCount/ItemCount";
 const ItemDetail = ({ producto }) => {
   const { nombre, precio, pictureUrl, stock, description } = producto;
 
+  const onAdd = (cant) => {
+    alert(`Se agregaron ${cant} productos`);
+  };
+
   return (
     <div className="container-fluid item-detail-box">
       <div className="card">
@@ -13,7 +17,7 @@ const ItemDetail = ({ producto }) => {
           <p className="card-text">{description}</p>
           <p className="card-text">${precio}</p>
           <div className="counting">
-            <ItemCount stock={stock} initial={1}>
+            <ItemCount stock={stock} initial={1} onAdd={onAdd}>
               {stock}
             </ItemCount>
           </div>

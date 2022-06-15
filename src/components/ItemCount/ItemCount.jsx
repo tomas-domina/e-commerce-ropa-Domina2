@@ -1,5 +1,6 @@
 import "../ItemCount/ItemCount.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function ItemCount({ stock, initial, onAdd }) {
   let [count, setCount] = useState(initial);
@@ -16,6 +17,15 @@ function ItemCount({ stock, initial, onAdd }) {
     }
   }
 
+  const [mostrar, setMostrar] = useState(true);
+  const cambiarMostrar = () => {
+    setMostrar(false);
+  };
+
+  const finalizar = () => {
+    onAdd(count);
+  };
+
   return (
     <div className="item-count">
       <div class="btn-group" role="group" aria-label="Basic example">
@@ -30,9 +40,31 @@ function ItemCount({ stock, initial, onAdd }) {
         </button>
       </div>
       <div>
-        <button type="button" className="btn btn-light border mt-3">
-          Agregar al carrito
-        </button>
+        {mostrar ? (
+          <button
+            className="btn btn-light border mt-3"
+            onClick={cambiarMostrar}
+          >
+            Agregar al Carrito
+          </button>
+        ) : (
+          <div>
+            <Link to="/cart">
+              <button
+                className="btn btn-light border mt-3 me-3"
+                onClick={finalizar}
+              >
+                Finalizar Compra
+              </button>
+            </Link>
+
+            <Link to="/">
+              <button className="btn btn-light border mt-3" onClick={finalizar}>
+                Seguir Comprando
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

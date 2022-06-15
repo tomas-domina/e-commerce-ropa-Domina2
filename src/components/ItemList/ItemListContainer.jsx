@@ -169,21 +169,16 @@ const ItemListContainer = () => {
   });
 
   useEffect(() => {
-    if (categoriaId) {
-      promise
-        .then((res) => {
-          setProductos(res.filter((item) => item.categoria === categoriaId));
-          setLoading(true);
-        })
-        .catch((err) => console.log(err));
-    } else {
-      promise
-        .then((res) => {
-          setProductos(res);
-          setLoading(true);
-        })
-        .catch((err) => console.log(err));
-    }
+    promise
+      .then((res) => {
+        setProductos(
+          !categoriaId
+            ? res
+            : res.filter((item) => item.categoria === categoriaId)
+        );
+        setLoading(true);
+      })
+      .catch((err) => console.log(err));
   }, [categoriaId]);
 
   return (
