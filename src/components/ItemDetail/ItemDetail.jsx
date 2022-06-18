@@ -1,12 +1,18 @@
 import "../ItemDetail/ItemDetail.css";
 import ItemCount from "../ItemCount/ItemCount";
+import { useCartContext } from "../../context/cartContext";
 
 const ItemDetail = ({ producto }) => {
   const { nombre, precio, pictureUrl, stock, description } = producto;
 
+  const { cart, addToCart } = useCartContext();
+
   const onAdd = (cant) => {
-    alert(`Se agregaron ${cant} productos`);
+    console.log(`Se agregaron ${cant} productos`);
+    addToCart({ ...producto, cantidad: cant });
   };
+
+  console.log(cart);
 
   return (
     <div className="container-fluid item-detail-box">

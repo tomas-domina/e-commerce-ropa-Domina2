@@ -161,7 +161,6 @@ const ItemListContainer = () => {
   const [loading, setLoading] = useState(false);
   const { categoriaId } = useParams();
 
-  console.log(categoriaId);
   const promise = new Promise((res, rej) => {
     setTimeout(() => {
       res(listaProductos);

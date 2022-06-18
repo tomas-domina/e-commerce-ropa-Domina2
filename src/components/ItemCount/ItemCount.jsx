@@ -59,7 +59,7 @@ function ItemCount({ stock, initial, onAdd }) {
             </Link>
 
             <Link to="/">
-              <button className="btn btn-light border mt-3" onClick={finalizar}>
+              <button className="btn btn-ligth border mt-3" onClick={finalizar}>
                 Seguir Comprando
               </button>
             </Link>
