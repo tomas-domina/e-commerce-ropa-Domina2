@@ -1,15 +1,22 @@
 import React from "react";
 import "../NavBar/CartWidget.css";
-import ItemCount from "../ItemCount/ItemCount";
 import { Link } from "react-router-dom";
+import { useCartContext } from "../../context/cartContext";
 
 function CartWidget() {
+  const { IconCart } = useCartContext();
+
   return (
-    <div>
-      <Link to="/cart">
+    <Link to="/cart">
+      <div className="cartWidget">
+        {IconCart() < 1 ? (
+          <p className="numberWidget">0</p>
+        ) : (
+          <p className="numberWidget">{IconCart()}</p>
+        )}
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="icon icon-tabler icon-tabler-shopping-cart"
+          className="icon icon-tabler icon-tabler-shopping-cart"
           width="80"
           height="80"
           viewBox="0 0 24 24"
@@ -25,8 +32,8 @@ function CartWidget() {
           <path d="M17 17h-11v-14h-2" />
           <path d="M6 5l14 1l-1 7h-13" />
         </svg>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 }
 

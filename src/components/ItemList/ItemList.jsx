@@ -1,8 +1,9 @@
 import React from "react";
 import Item from "./Item";
 import "../ItemList/ItemList.css";
+import { memo } from "react";
 
-const ItemList = ({ productos }) => {
+const ItemList = memo(({ productos }) => {
   return (
     <div className="itemGrid">
       {productos.map((producto) => (
@@ -10,6 +11,6 @@ const ItemList = ({ productos }) => {
       ))}
     </div>
   );
-};
+});
 
 export default ItemList;

@@ -5,3 +5,23 @@
     float: right;
     margin-top: 15px;
 }
+
+.cartWidget{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 25px;
+}
+
+.numberWidget {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    margin-top: 25px;
+    border-radius: 50%;
+    background-color: red;
+    width: 25px;
+    height: 25px;
+    color: white;
+    font-weight: bold;
+}

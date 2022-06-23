@@ -2,8 +2,9 @@ import React from "react";
 import ItemCount from "../ItemCount/ItemCount";
 import "../ItemList/Item.css";
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
-const Item = ({ producto }) => {
+const Item = memo(({ producto }) => {
   const { nombre, pictureUrl, precio, stock, id } = producto;
   return (
     <div className="card card-main">
@@ -20,6 +21,6 @@ const Item = ({ producto }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Item;

@@ -12,8 +12,6 @@ const ItemDetail = ({ producto }) => {
     addToCart({ ...producto, cantidad: cant });
   };
 
-  console.log(cart);
-
   return (
     <div className="container-fluid item-detail-box">
       <div className="card">
