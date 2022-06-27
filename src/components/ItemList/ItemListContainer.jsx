@@ -15,25 +15,6 @@ const ItemListContainer = () => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // const promise = new Promise((res, rej) => {
-  //   setTimeout(() => {
-  //     res(collection);
-  //   }, 1000);
-  // });
-
-  // useEffect(() => {
-  //   promise
-  //     .then((res) => {
-  //       setProductos(
-  //         !categoriaId
-  //           ? res
-  //           : res.filter((item) => item.categoria === categoriaId)
-  //       );
-  //       setLoading(true);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, [categoriaId]);
-
   const { categoriaId } = useParams();
   useEffect(() => {
     const db = getFirestore();
@@ -43,7 +24,7 @@ const ItemListContainer = () => {
         queryCollection,
         where("categoria", "==", categoriaId)
       );
-      getDocs(queryCollection)
+      getDocs(queryCollectionFilter)
         .then((resp) =>
           setProductos(
             resp.docs.map((item) => ({ id: item.id, ...item.data() }))
