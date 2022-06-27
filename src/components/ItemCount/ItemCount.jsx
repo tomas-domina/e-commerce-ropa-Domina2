@@ -18,12 +18,10 @@ function ItemCount({ stock, initial, onAdd }) {
   }
 
   const [mostrar, setMostrar] = useState(true);
-  const cambiarMostrar = () => {
-    setMostrar(false);
-  };
 
   const finalizar = () => {
     onAdd(count);
+    setMostrar(false);
   };
 
   return (
@@ -41,25 +39,22 @@ function ItemCount({ stock, initial, onAdd }) {
       </div>
       <div>
         {mostrar ? (
-          <button
-            className="btn btn-light border mt-3"
-            onClick={cambiarMostrar}
-          >
+          <button className="btn btn-light border mt-3" onClick={finalizar}>
             Agregar al Carrito
           </button>
         ) : (
           <div>
+            <p className="mt-3 text-success">
+              Se agregaron {count} productos al carrito
+            </p>
             <Link to="/cart">
-              <button
-                className="btn btn-light border mt-3 me-3"
-                onClick={finalizar}
-              >
+              <button className="btn btn-light border mt-3 me-3">
                 Finalizar Compra
               </button>
             </Link>
 
             <Link to="/">
-              <button className="btn btn-ligth border mt-3" onClick={finalizar}>
+              <button className="btn btn-ligth border mt-3">
                 Seguir Comprando
               </button>
             </Link>

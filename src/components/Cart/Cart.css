@@ -10,24 +10,18 @@ li {
 .li-carrito{
     display: flex;
     align-items: center;
-    padding: 15px;
+    
     border: 1px solid #000;
     margin-left: -35px;
 }
 
 
-.borrarItem{
-    max-width: 80%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-left: 950px;
-    border: none;
-    padding: 30px;
-    
-}
 .btnDel{
     border: none;
     background-color: white;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    
     
 }

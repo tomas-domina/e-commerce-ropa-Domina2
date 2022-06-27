@@ -1,27 +1,23 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { listaProductos } from "../ItemList/ItemListContainer";
+
 import ItemDetail from "./ItemDetail";
 import "./ItemDetailContainer.css";
-
-const getItem = (id) => {
-  return new Promise((res, rej) => {
-    setTimeout(() => {
-      res(listaProductos.find((prod) => prod.id === id));
-    }, 1000);
-  });
-};
+import { collection, doc, getDoc, getFirestore } from "firebase/firestore";
 
 const ItemDetailContainer = () => {
   const [producto, setProducto] = useState({});
+  const [bool, setBool] = useState(false);
 
   const { id } = useParams();
 
   useEffect(() => {
-    getItem(id)
-      .then((resp) => setProducto(resp))
+    const db = getFirestore();
+    const queryItem = doc(db, "items", id);
+    getDoc(queryItem)
+      .then((resp) => setProducto({ id: resp.id, ...resp.data() }))
       .catch((err) => console.log(err));
-  });
+  }, [bool]);
 
   return (
     <div className="card-detail">
