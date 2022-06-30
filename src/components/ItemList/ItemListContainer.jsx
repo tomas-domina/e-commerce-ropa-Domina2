@@ -19,35 +19,18 @@ const ItemListContainer = () => {
   useEffect(() => {
     const db = getFirestore();
     const queryCollection = collection(db, "items");
-    if (categoriaId) {
-      const queryCollectionFilter = query(
-        queryCollection,
-        where("categoria", "==", categoriaId)
-      );
-      getDocs(queryCollectionFilter)
-        .then((resp) =>
-          setProductos(
-            resp.docs.map((item) => ({ id: item.id, ...item.data() }))
-          )
-        )
-        .catch((err) => console.log(err))
-        .finally(setLoading(false));
-    } else {
-      getDocs(queryCollection)
-        .then((resp) =>
-          setProductos(
-            resp.docs.map((item) => ({ id: item.id, ...item.data() }))
-          )
-        )
-        .catch((err) => console.log(err))
-        .finally(setLoading(false));
-    }
-  }, [categoriaId]);
 
-  // useEffect(() => {
-  //   const db = getFirestore();
-  //   const queryCollection = collection(db, "items");
-  // }, []);
+    getDocs(
+      categoriaId
+        ? query(queryCollection, where("categoria", "==", categoriaId))
+        : queryCollection
+    )
+      .then((resp) =>
+        setProductos(resp.docs.map((item) => ({ id: item.id, ...item.data() })))
+      )
+      .catch((err) => console.log(err))
+      .finally(setLoading(false));
+  }, [categoriaId]);
 
   return (
     <div style={{ textAlign: "center" }}>

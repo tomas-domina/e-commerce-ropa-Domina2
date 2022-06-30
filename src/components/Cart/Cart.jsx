@@ -3,8 +3,69 @@ import { useCartContext } from "../../context/cartContext";
 import "./Cart.css";
 import { Link } from "react-router-dom";
 
+import {
+  addDoc,
+  getFirestore,
+  collection,
+  doc,
+  updateDoc,
+  query,
+  where,
+  documentId,
+  writeBatch,
+  getDocs,
+} from "firebase/firestore";
+
 const Cart = () => {
   const { cart, emptyCart, totalPrice, deleteItem } = useCartContext();
+
+  const generateOrder = async (e) => {
+    e.preventDefault();
+    let order = {};
+
+    order.buyer = { name: "tomas", email: "t@gmail.com", phone: "12345678" };
+    order.total = totalPrice();
+
+    order.items = cart.map((cartItem) => {
+      const id = cartItem.id;
+      const name = cartItem.nombre;
+      const price = cartItem.precio * cartItem.cantidad;
+
+      return { id, name, price };
+    });
+
+    const db = getFirestore();
+    const orderCollection = collection(db, "orders");
+    addDoc(orderCollection, order).then((resp) =>
+      alert(`Compra realizada, su número de orden es: ${resp.id}`)
+    );
+
+    const queryCollectionStock = collection(db, "items");
+
+    const queryUpdateStock = query(
+      queryCollectionStock,
+      where(
+        documentId(),
+        "in",
+        cart.map((item) => item.id)
+      )
+    );
+    const batch = writeBatch(db);
+
+    await getDocs(queryUpdateStock)
+      .then((resp) =>
+        resp.docs.forEach((res) =>
+          batch.update(res.ref, {
+            stock:
+              res.data().stock -
+              cart.find((item) => item.id === res.id).cantidad,
+          })
+        )
+      )
+      .finally(() => console.log("Compra Realizada"));
+
+    batch.commit();
+  };
 
   return (
     <div className="container-fluid">
@@ -12,7 +73,9 @@ const Cart = () => {
         <div>
           <h1>El carrito esta vacio</h1>
           <Link to="/">
-            <button>Volver al Inicio</button>
+            <button className="btn btn-outline-primary mt-3">
+              Volver al Inicio
+            </button>
           </Link>
         </div>
       ) : (
@@ -71,7 +134,15 @@ const Cart = () => {
           </div>
 
           <div>
-            <button onClick={emptyCart}>Vaciar Carrito</button>
+            <button className="btn btn-success mt-3" onClick={generateOrder}>
+              Finalizar Compra
+            </button>
+          </div>
+
+          <div>
+            <button className="btn btn-danger mt-3" onClick={emptyCart}>
+              Vaciar Carrito
+            </button>
           </div>
         </div>
       )}

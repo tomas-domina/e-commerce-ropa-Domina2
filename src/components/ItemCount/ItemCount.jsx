@@ -44,7 +44,7 @@ function ItemCount({ stock, initial, onAdd }) {
           </button>
         ) : (
           <div>
-            <p className="mt-3 text-success">
+            <p className="mt-5 text-success">
               Se agregaron {count} productos al carrito
             </p>
             <Link to="/cart">
