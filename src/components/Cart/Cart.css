@@ -25,3 +25,10 @@ li {
     
     
 }
+
+form {
+    width: 50%;
+    margin-top: 30px;
+    border: 50px;
+
+}

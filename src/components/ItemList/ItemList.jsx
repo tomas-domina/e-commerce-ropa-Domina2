@@ -3,11 +3,11 @@ import Item from "./Item";
 import "../ItemList/ItemList.css";
 import { memo } from "react";
 
-const ItemList = memo(({ productos }) => {
+const ItemList = memo(({ products }) => {
   return (
     <div className="itemGrid">
-      {productos.map((producto) => (
-        <Item key={producto.id} producto={producto} />
+      {products.map((product) => (
+        <Item key={product.id} product={product} />
       ))}
     </div>
   );

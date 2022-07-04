@@ -2,70 +2,11 @@ import React from "react";
 import { useCartContext } from "../../context/cartContext";
 import "./Cart.css";
 import { Link } from "react-router-dom";
-
-import {
-  addDoc,
-  getFirestore,
-  collection,
-  doc,
-  updateDoc,
-  query,
-  where,
-  documentId,
-  writeBatch,
-  getDocs,
-} from "firebase/firestore";
+import Form from "./Form";
+import DeleteIcon from "./DeleteIcon";
 
 const Cart = () => {
   const { cart, emptyCart, totalPrice, deleteItem } = useCartContext();
-
-  const generateOrder = async (e) => {
-    e.preventDefault();
-    let order = {};
-
-    order.buyer = { name: "tomas", email: "t@gmail.com", phone: "12345678" };
-    order.total = totalPrice();
-
-    order.items = cart.map((cartItem) => {
-      const id = cartItem.id;
-      const name = cartItem.nombre;
-      const price = cartItem.precio * cartItem.cantidad;
-
-      return { id, name, price };
-    });
-
-    const db = getFirestore();
-    const orderCollection = collection(db, "orders");
-    addDoc(orderCollection, order).then((resp) =>
-      alert(`Compra realizada, su número de orden es: ${resp.id}`)
-    );
-
-    const queryCollectionStock = collection(db, "items");
-
-    const queryUpdateStock = query(
-      queryCollectionStock,
-      where(
-        documentId(),
-        "in",
-        cart.map((item) => item.id)
-      )
-    );
-    const batch = writeBatch(db);
-
-    await getDocs(queryUpdateStock)
-      .then((resp) =>
-        resp.docs.forEach((res) =>
-          batch.update(res.ref, {
-            stock:
-              res.data().stock -
-              cart.find((item) => item.id === res.id).cantidad,
-          })
-        )
-      )
-      .finally(() => console.log("Compra Realizada"));
-
-    batch.commit();
-  };
 
   return (
     <div className="container-fluid">
@@ -109,22 +50,7 @@ const Cart = () => {
                 </div>
                 <div className="borrarItem"></div>
                 <button className="btnDel" onClick={() => deleteItem(item.id)}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="icon-tabler-x"
-                    width="80"
-                    height="80"
-                    viewBox="0 0 24 24"
-                    stroke-width="3"
-                    stroke="#ff2825"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
+                  <DeleteIcon />
                 </button>
               </li>
             ))}
@@ -133,14 +59,10 @@ const Cart = () => {
             <strong>TOTAL A PAGAR: </strong> ${totalPrice()}
           </div>
 
-          <div>
-            <button className="btn btn-success mt-3" onClick={generateOrder}>
-              Finalizar Compra
-            </button>
-          </div>
+          <Form />
 
           <div>
-            <button className="btn btn-danger mt-3" onClick={emptyCart}>
+            <button className="btn btn-danger mt-3 mb-3" onClick={emptyCart}>
               Vaciar Carrito
             </button>
           </div>

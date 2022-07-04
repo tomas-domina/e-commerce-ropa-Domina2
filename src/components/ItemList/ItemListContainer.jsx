@@ -12,29 +12,29 @@ import {
 } from "firebase/firestore";
 
 const ItemListContainer = () => {
-  const [productos, setProductos] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { categoriaId } = useParams();
+  const { categoryId } = useParams();
   useEffect(() => {
     const db = getFirestore();
     const queryCollection = collection(db, "items");
 
     getDocs(
-      categoriaId
-        ? query(queryCollection, where("categoria", "==", categoriaId))
+      categoryId
+        ? query(queryCollection, where("categoria", "==", categoryId))
         : queryCollection
     )
       .then((resp) =>
-        setProductos(resp.docs.map((item) => ({ id: item.id, ...item.data() })))
+        setProducts(resp.docs.map((item) => ({ id: item.id, ...item.data() })))
       )
       .catch((err) => console.log(err))
       .finally(setLoading(false));
-  }, [categoriaId]);
+  }, [categoryId]);
 
   return (
     <div style={{ textAlign: "center" }}>
-      {loading ? <h1>...Cargando</h1> : <ItemList productos={productos} />}
+      {loading ? <h1>...Cargando</h1> : <ItemList products={products} />}
     </div>
   );
 };

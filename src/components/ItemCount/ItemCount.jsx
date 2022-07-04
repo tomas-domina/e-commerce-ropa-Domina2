@@ -5,56 +5,56 @@ import { Link } from "react-router-dom";
 function ItemCount({ stock, initial, onAdd }) {
   let [count, setCount] = useState(initial);
 
-  function agregar() {
+  function addItem() {
     if (count < stock) {
       setCount(count + 1);
     }
   }
 
-  function quitar() {
+  function deleteItem() {
     if (count > initial) {
       setCount(count - 1);
     }
   }
 
-  const [mostrar, setMostrar] = useState(true);
+  const [display, setDisplay] = useState(true);
 
-  const finalizar = () => {
+  const finishBuying = () => {
     onAdd(count);
-    setMostrar(false);
+    setDisplay(false);
   };
 
   return (
     <div className="item-count">
       <div class="btn-group" role="group" aria-label="Basic example">
-        <button onClick={quitar} type="button" className="btn btn-dark">
+        <button onClick={deleteItem} type="button" className="btn btn-dark">
           -
         </button>
         <button type="button" className="btn btn-light border">
           {count}
         </button>
-        <button onClick={agregar} type="button" className="btn btn-dark">
+        <button onClick={addItem} type="button" className="btn btn-dark">
           +
         </button>
       </div>
       <div>
-        {mostrar ? (
-          <button className="btn btn-light border mt-3" onClick={finalizar}>
+        {display ? (
+          <button className="btn btn-outline-dark mt-4" onClick={finishBuying}>
             Agregar al Carrito
           </button>
         ) : (
           <div>
             <p className="mt-5 text-success">
-              Se agregaron {count} productos al carrito
+              <strong>Se agregaron {count} productos al carrito</strong>
             </p>
             <Link to="/cart">
-              <button className="btn btn-light border mt-3 me-3">
+              <button className="btn btn-outline-dark border mt-3 me-3">
                 Finalizar Compra
               </button>
             </Link>
 
             <Link to="/">
-              <button className="btn btn-ligth border mt-3">
+              <button className="btn btn-outline-dark border mt-3">
                 Seguir Comprando
               </button>
             </Link>

@@ -6,7 +6,7 @@ import "./ItemDetailContainer.css";
 import { collection, doc, getDoc, getFirestore } from "firebase/firestore";
 
 const ItemDetailContainer = () => {
-  const [producto, setProducto] = useState({});
+  const [product, setProduct] = useState({});
   const [bool, setBool] = useState(false);
 
   const { id } = useParams();
@@ -15,13 +15,13 @@ const ItemDetailContainer = () => {
     const db = getFirestore();
     const queryItem = doc(db, "items", id);
     getDoc(queryItem)
-      .then((resp) => setProducto({ id: resp.id, ...resp.data() }))
+      .then((resp) => setProduct({ id: resp.id, ...resp.data() }))
       .catch((err) => console.log(err));
   }, [bool]);
 
   return (
     <div className="card-detail">
-      <ItemDetail producto={producto}></ItemDetail>
+      <ItemDetail product={product}></ItemDetail>
     </div>
   );
 };

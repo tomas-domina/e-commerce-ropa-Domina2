@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import ItemListContainer from "../src/components/ItemList/ItemListContainer";
@@ -15,7 +14,7 @@ function App() {
         <Routes>
           <Route index path="/" element={<ItemListContainer />}></Route>
           <Route
-            path="/category/:categoriaId"
+            path="/category/:categoryId"
             element={<ItemListContainer />}
           ></Route>
           <Route path="/details/:id" element={<ItemDetailContainer />}></Route>

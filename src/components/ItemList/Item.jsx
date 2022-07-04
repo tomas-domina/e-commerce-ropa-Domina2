@@ -4,8 +4,8 @@ import "../ItemList/Item.css";
 import { Link } from "react-router-dom";
 import { memo } from "react";
 
-const Item = memo(({ producto }) => {
-  const { nombre, pictureUrl, precio, stock, id } = producto;
+const Item = memo(({ product }) => {
+  const { nombre, pictureUrl, precio, stock, id } = product;
   return (
     <div className="card card-main">
       <img className="card-img-top" src={pictureUrl} alt="" />

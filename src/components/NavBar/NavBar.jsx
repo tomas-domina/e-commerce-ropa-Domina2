@@ -1,8 +1,8 @@
 import React from "react";
-import Cart from "../Cart/Cart";
+
 import CartWidget from "./CartWidget";
 import "./NavBar.css";
-import image from "../../images/logo.png";
+
 import logo from "../../images/logo2.png";
 import { Link } from "react-router-dom";
 
@@ -56,7 +56,7 @@ function NavBar() {
             </li>
           </ul>
           <div className="cart">
-            <CartWidget></CartWidget>
+            <CartWidget />
           </div>
         </nav>
         <section></section>
